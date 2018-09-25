@@ -1,0 +1,173 @@
+########
+ISSUES
+#########
+
+July.17.2018
+-------------
+IF Statement.
+i was creating a progam in Ch3 (python for beginners).
+Its a guessing game, the computer randomly chooses a number, and the user has to guess it.
+The user is limited to 3 guesses
+
+The issue I was running into was, it would not accept the correct guess if it was the last guess, 
+but it would accept it if was any of the other guesses.
+
+The solution:
+-Don't use "elif". 
+-When I changed the "If Statement" to only "Ifs" with no "elif" or "else"
+
+////////////
+
+Aug..2018
+----------
+Chapter 4 : The Jumble Word game.
+-I was able to create a list of words / and randomly select one of them to be part of the game
+-The issue I was running into was actually "jumbeling" the word.
+-The book was walking us through this whole process of finding the position of each letter, and jumble it that way.
+I was running into an issue with the loop, it either ran once, and ran forever. I was choosing one word to jumble, but then BOOM.
+
+The Solution:
+-Bill mentioned the random.shuffle() method. Its, brilliant.
+The only catch is, it only works with lists, so all I had to do was add the random choosen word into a list, then shuffle the list
+
+# Creating the sequence of the words
+words = ("python", "easy", "ash")
+
+# Pick a word at random from "words"
+random_word = random.choice(words)
+
+# Creat a list to put that word in
+# Shuffle that list
+l= list(random_word)
+random.shuffle(l)
+
+# Display the word + the Shuffled word
+print("The correct word is: [ ", random_word, " ]")
+print("The Jumble word is: ", l)
+
+It worked GLORIOUSLY.
+Now I just need to add the User's part, of guessing the word, and this would be done.
+
+
+///////////
+
+Aug.3.2018  (continue)
+-----------
+The First Challenge in Chapter 5
+-Create a program that prints a list of words in random order.
+-It should print ALL the words, but not repeat any.
+
+This was quite the issue for me, it took me a while, about a week or two to figure a way to make this happen.
+it had to be broken down into sections.
+1. creating a list of words
+2. indexing that list
+3. creating an empty list (to be used for checking)
+4. creating a while loop
+5. creating a randomly generated number (with in the range of the word list)
+
+From 1 to 3 everything is pretty straight forward, its after that part that things get a bit complex.
+The logic is:
+>To generate a random number 
+>Check that random number to make sure its not repeated
+>Compare that random number to the indexed list
+>Print out the word that is associated with that number 
+
+My Solution:
+Before the loop I had
+l = len(word_list)  # to have a number for how long the list is
+i = 0  # the incrementer inside the while loop
+picked_nums = []   # the empty list
+
+#--- the while loop
+while (i < l):
+
+    #----- create a random number generator
+    rand_num = random.randint(0,2)
+    #-- Check to see if the number is in picked_nums
+    if rand_num not in picked_nums:
+        # --IF NOT: Add the rand_num to the picked_num list
+        picked_nums.append(rand_num)
+        print("Randomly Picked Numbers are: ", picked_nums)
+        # ---- printing the word associated with choosen number
+        print("The word in that index is: ", word_list[rand_num])
+        print("\n* * * * *\n")
+    else:
+        continue
+    #-- incrementing the while loop
+    i += 1
+
+That fixed the issue for me.
+///////
+
+
+Aug.15.2018
+DICTIONARIES
+--------------
+In Chapter 5 we had to create a dictionary and manipulate it a bit.
+One of the issues I was having, is that you have to type in the EXACT word, other wise, it would just create a new one
+I need to figure out an "input check" some how.
+One way I'm trying to do that, is provide the user with a simple choices,
+ for example: 
+ 1- strength // 2- healther // 3- wisdom
+ That way, they simply need to type in 1, 2, or 3
+That will of course require an IF/ELSE statement to match the choice
+So I've had to see if I can work with each KEY/VALUE by its self.
+
+I saw that if you simply say:
+ dd.values()
+That would print out ALL of the values, which is helpful to show them all, but when I need just ONE value i did
+ dd = {"s": 1, "h": 2}
+ inp = "s" 
+ dd[inp]
+That would print out just "1".
+
+
+
+NOW.
+In one of my earlier non-fool proof verstions.
+I was able to have the user choose which item they wanted to change, and how much to change it by doing it this way:
+ userInput1 = input("which to change? ") <-- here they would for example type "s"
+ userInput2 = int(input("How much to change it with")) <-- here they would type "10"
+Making the change
+ dd[userInput1] = userInput2
+And that worked.
+What I need to adjust is the "userInput1", To make it a simple "1,2,3" choice
+
+//////
+Aug.15.2018 (continue)
+Dictionary
+-----------
+I was able to update the program to have 2 selection options to help make this a bit easier.
+The updated file is:
+Ch5_Code-Tester_v2
+
+The 1st Selection is:
+1~ Add
+2~ Subtract
+
+
+The 2nd Selection:
+s- Strength
+h- Health
+w- Wisdom
+
+This solution has actually worked, its still not "fool-proof" yet, but it has simplified the options for the user, and it works. 
+The "Total Points" get updated automatically based on the choices.
+What will make it even better is the user of function, which will be coming in future lessons.
+
+Another thimg that would help, is figuring out how to "clear the screen" once it goes through the loop.
+So far what I have found via search, it seems to be for IDE, but has not worked these programs.
+
+To Clear the Screen [ this has not worked for me as of yet ]
+Import os
+#-- for Windows
+clear = lambda: os.system('cls')
+clear()
+
+#- Linus systems
+clear = lambda: os.system('clear') 
+clear()
+
+
+////////////////
+
